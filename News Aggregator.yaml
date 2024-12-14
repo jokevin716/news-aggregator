@@ -1,0 +1,334 @@
+openapi: 3.0.0
+info:
+  title: News Aggregator
+  version: 1.0.0
+servers:
+  - url: http://{{host}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Authentication
+    description: |-
+      **Register User**
+
+      - **Method:** `POST`
+
+      - **URL:** `/api/register`
+
+      - **Description:** Registers a new user
+
+
+      **Login**
+
+      - **Method:** `POST`
+
+      - **URL:** `/api/login`
+
+      - **Description:** Logs in a user
+
+
+      **Logout**
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/logout`
+
+      - **Description:** Logs out a user
+
+
+      **Reset Password**
+
+      - **Method:** `POST`
+
+      - **URL:** `/api/resetPassword`
+
+      - **Description:** Reset user's password
+  - name: Articles
+    description: >-
+      **Get Article by ID**
+
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/getArticleById`
+
+      - **Description:** Get 1 article detail based on article ID
+
+
+      **Get Filtered Articles**
+
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/getFilteredArticles`
+
+      - **Description:** Get articles based on filters: keyword, source,
+      category, date
+  - name: Preferences
+    description: |-
+      **Get Preferences**
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/getPreferences`
+
+      - **Description:** Get a user's preference(s)
+
+
+      **Set Preferences**
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/setPreferences`
+
+      - **Description:** Set a user's preference(s)
+
+
+      **Fetch Personalized Feed**
+
+      - **Method:** `GET`
+
+      - **URL:** `/api/fetchPersonalizedFeed`
+
+      - **Description:** Get articles based on user preferences
+paths:
+  /api/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: John Doe
+                email:
+                  type: string
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  example: password123
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: john.doe@example.com
+                password:
+                  type: string
+                  example: password123
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout User
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/resetPassword:
+    post:
+      tags:
+        - Authentication
+      summary: Reset Password
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  example: password123
+                new_password:
+                  type: string
+                  example: password12345
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/getArticleById/1:
+    get:
+      tags:
+        - Articles
+      summary: Get Article by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/getFilteredArticles:
+    get:
+      tags:
+        - Articles
+      summary: Get Articles by Filter
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: keyword
+          in: query
+          schema:
+            type: string
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: date
+          in: query
+          schema:
+            type: string
+        - name: source
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/getPreferences:
+    get:
+      tags:
+        - Preferences
+      summary: Get Preferences
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/setPreferences:
+    post:
+      tags:
+        - Preferences
+      summary: Set Preferences
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                categories[]:
+                  type: string
+                  example: technology, science, politics
+                sources[]:
+                  type: string
+                  example: BBC, NYTimes
+                authors[]:
+                  type: string
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
+  /api/fetchPersonalizedFeed:
+    get:
+      tags:
+        - Preferences
+      summary: Fetch Personalized Feed
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json: {}
