@@ -10,7 +10,7 @@ use App\Models\Article;
 
 class FetchArticlesCommand extends Command
 {
-    protected $signature = 'fetch:articles {--category= : (Optional) Fetch specific category}';
+    protected $signature = 'fetch:articles';
     protected $description = 'Fetch articles from NewsAPI, NYTimes, and The Guardian';
 
     public function __construct()

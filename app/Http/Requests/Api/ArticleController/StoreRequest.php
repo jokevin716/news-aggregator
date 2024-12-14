@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'author' => 'required|string',
+            'author' => 'nullable|string',
             'description' => 'nullable|string',
             'content' => 'nullable|string',
             'source' => 'nullable|string',

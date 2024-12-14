@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PreferenceController;
-use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication
