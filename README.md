@@ -12,49 +12,47 @@ Before you begin, ensure you have the following installed on your machine:
 ## Project Structure
 
 The project structure should look like this:
+```
 /news-aggregator
-    ├── Dockerfile 
-    ├── docker-compose.yml 
-    ├── entrypoint.sh 
-    ├── nginx.conf 
-    ├── .env 
-    └── database 
-        └── database.sqlite
-
+  ├── Dockerfile 
+  ├── docker-compose.yml 
+  ├── entrypoint.sh 
+  ├── nginx.conf 
+  ├── .env 
+  └── database 
+    └── database.sqlite
+```
 
 ## Setup Instructions
 
 1. **Clone the Repository**:
 
-   ```bash
-   git clone [https://github.com/jokevin716/news-aggregator.git](https://github.com/jokevin716/news-aggregator.git)
-   cd news-aggregator
+   ```
+    git clone https://github.com/jokevin716/news-aggregator.git
+    cd news-aggregator
    ```
 
 2. **Create the SQLite Database**:
 
 Create an empty SQLite database file:
 
-    ```bash
-   touch database/database.sqlite
-   ```
+    touch database/database.sqlite
+ 
 
 3. **Configure Environment Variables**:
 
 Update the `.env` file to configure your application. Ensure the database connection is set to SQLite:
 
-    ```bash
-   DB_CONNECTION=sqlite
-   DB_DATABASE=/var/www/database/database.sqlite
-   ```
+
+    DB_CONNECTION=sqlite
+    DB_DATABASE=/var/www/database/database.sqlite
+
 
 4. **Build and Start the Containers**:
 
 Run the following command to build the Docker images and start the containers:
 
-    ```bash
-   docker-compose up --build -d
-   ```
+    docker-compose up --build -d
 
 Access the application in your browser and navigate to [http://localhost:8080](http://localhost:8080) to access your Laravel application.
 
@@ -82,9 +80,7 @@ Access the application in your browser and navigate to [http://localhost:8080](h
 
 To stop the containers, run:
 
-    ```bash
     docker-compose down
-    ```
 
 ## Additional Notes
 
