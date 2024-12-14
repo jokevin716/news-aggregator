@@ -8,24 +8,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ArticleTest extends TestCase
+class ArticlesTest extends TestCase
 {
     use RefreshDatabase;
     public function test_user_can_get_articles_with_filters()
     {
         $user = User::factory()->create();
 
-        Article::create([
-            'title' => 'Test Article',
-            'author' => 'John Doe',
-            'description' => 'This is a test description.',
-            'content' => 'This is test content.',
-            'categories' => 'news,tech',
-            'source' => 'NewsAPI',
-            'url' => 'https://example.com/article',
-            'published_at' => now(),
-            'keywords' => 'test,description,news,tech',
-        ]);
+        Article::factory()->create();
 
         $response = $this->actingAs($user, 'sanctum')
             ->getJson('/api/getFilteredArticles?keyword=sample&category=tech');

@@ -32,12 +32,7 @@ class PreferenceTest extends TestCase
     {
         $user = User::factory()->create();
 
-        Preference::create([
-            'categories' => ['tech', 'news'],
-            'sources' => ['NewsAPI', 'NYTimes'],
-            'authors' => ['John Doe'],
-            'user_id' => $user->id,
-        ]);
+        Preference::factory()->create(['user_id' => $user->id]);
 
         $response = $this->actingAs($user, 'sanctum')
             ->getJson('/api/getPreferences');
