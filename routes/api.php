@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware(['auth:sanctum', 'throttle:api'])->group(function() {
+Route::middleware('auth:sanctum')->group(function() {
     Route::post('/resetPassword', [AuthController::class, 'resetPassword']);
-    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 
     // Article
     Route::get('/getAllArticles/{pages?}', [ArticleController::class, 'index']);
