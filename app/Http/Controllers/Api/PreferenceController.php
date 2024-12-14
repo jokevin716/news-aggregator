@@ -90,7 +90,7 @@ class PreferenceController extends Controller
             });
         }
 
-        $articles = $query->orderBy('published_at', 'desc')->paginate($request->input('limit', 10));
+        $articles = $query->orderBy('published_at', 'desc')->paginate($request->limit ?? 10);
 
         return response()->json($articles);
     }
